@@ -2,7 +2,9 @@
 
 ### Requirements
 almath==1.6.8
+
 certifi==2020.6.20
+
 docutils==0.15.2
 mkl-fft==1.0.15
 mkl-service==2.3.0
