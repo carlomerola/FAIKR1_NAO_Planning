@@ -1,4 +1,6 @@
 # FAIKR1_NAO_planning
 
-### Requirements
+## Install the necessary dependencies:
+```
 pip install requirements.txt
+```
