@@ -4,3 +4,4 @@ try:
     print("naoqi found")
 except Exception as e:
     print("Error: naoqi not found", e, sep='\n')
+    print("Push Test")
