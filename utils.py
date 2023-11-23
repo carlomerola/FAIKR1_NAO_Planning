@@ -76,7 +76,7 @@ def get_path(config, moves):
     return path
 
 def sit_and_say_tequila(move_name,path):
-    phrase, next_move = ('WaitForIt','Diagonalleft') if move_name == 'Sit' else ('OneMoreTime','Diagonalright')
+    phrase, next_move = ('WaitForIt','Diagonalleft') if move_name != 'Sit' else ('OneMoreTime','Diagonalright')
     path.append('Say' + phrase)
     path.append(move_name)
     path.append('SayTequila')
