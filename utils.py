@@ -16,6 +16,11 @@ def get_config():
         robot_ip = sys.argv[1]
     config['ip'] = robot_ip
     config['port'] = port
+    config['directory'] = os.getcwd()
+    config.update({'dance_moves_folder_location': 'dance_moves',
+                   'metadata_file_location': 'meta_data//metadata.csv',
+                   'music_location': 'tequila.mp3'
+                   })
     return config
 
 

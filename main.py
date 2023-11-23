@@ -21,12 +21,7 @@ def main(config):
         print(time.time()-start_time)
 
 if __name__ == "__main__":
-    config = get_config()
-    config['directory'] = os.getcwd()
-    config.update({'dance_moves_folder_location': 'dance_moves',
-                   'metadata_file_location': 'meta_data//metadata.csv',
-                   'music_location': 'tequila.mp3'
-                   })
+    config = get_config()    
     music_thread = threading.Thread(target=play_music, args=(config['directory'] + "//"+config['music_location'],))
     music_thread.start()
     main(config)
