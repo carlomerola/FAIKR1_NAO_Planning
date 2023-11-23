@@ -1,6 +1,8 @@
 # Choregraphe bezier export in Python.
 from naoqi import ALProxy
 import sys
+from utils import *
+
 names = list()
 times = list()
 keys = list()
@@ -112,17 +114,9 @@ keys.append([[0.0987845, [3, -2.14667, 0], [3, 0, 0]]])
 try:
   # uncomment the following line and modify the IP if you use this script outside Choregraphe.
   # motion = ALProxy("ALMotion", IP, 9559)
-    ip = "127.0.0.1"
-    port = 9559
+    config = get_config()
    
-    if len(sys.argv) <= 1:
-        print "(robotIP default: 127.0.0.1)"
-    elif len(sys.argv) <= 2:
-        robotIP = sys.argv[1]
-    else:
-        port = int(sys.argv[2])
-        robotIP = sys.argv[1]
-    otion = ALProxy("ALMotion", ip, port)
+    otion = ALProxy("ALMotion", config['ip'], config['port'])
     otion.angleInterpolationBezier(names, times, keys)
   
 except BaseException, err:
