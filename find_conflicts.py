@@ -1,3 +1,7 @@
+'''
+36,2.5,SayText.py,SayText,9,,,0
+move_num, duration, python_file, move_name, prec, post, mand.
+'''
 import os
 import time
 import pandas as pd

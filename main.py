@@ -16,8 +16,7 @@ def main(config):
             text = re.sub(r"(\w)([A-Z])", r"\1 \2", move_name[3:])
             os.system("python " + "dance_moves//" + 'SayText.py' + " " + config['ip'] + ' ' + str(config['port']) + ' "' + text + '"')
         else:
-            continue
-            #os.system("python " + "dance_moves//" + moves[move_name].file_name + " " + config['ip'] + ' ' + str(config['port']))
+            os.system("python " + "dance_moves//" + moves[move_name].file_name + " " + config['ip'] + ' ' + str(config['port']))
         print(time.time()-start_time)
 
 if __name__ == "__main__":
@@ -25,4 +24,4 @@ if __name__ == "__main__":
     music_thread = threading.Thread(target=play_music, args=(config['directory'] + "//"+config['music_location'],))
     music_thread.start()
     main(config)
-    print music_thread.join()
+    print (music_thread.join())
