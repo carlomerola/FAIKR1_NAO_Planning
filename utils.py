@@ -29,16 +29,15 @@ def play_music(path):  # music playback by subprocess
 def eval_conditions(st):
     if pd.isna(st):
         return dict()
-    st = st.replace(";", ",")
     return eval(st)
 
 
 def get_moves_metadata(config):
-    metadata = pd.read_csv(config['metadata_file_location'])
+    metadata = pd.read_csv(config['metadata_file_location'],sep=';')
     moves = dict()
     for index, row in metadata.iterrows():
-        # name, duration, preconditions, postconditions,popularity
-        moves[row['MoveName']] = (Move(row['File'], row['MoveName'], float(row['Duration']),
+        # filename,movename, duration, preconditions, postconditions, mandatory
+        moves[row['MoveName']] = (Move(row['FileName'], row['MoveName'], float(row['Duration']),
                                        eval_conditions(row['Precond']), eval_conditions(row['Postcond']),
                                        row['Mandatory']))
 
@@ -56,9 +55,9 @@ def get_path(config, moves):
 
     # define order and time frame for mandatory states
     # state representation = initial, goal, time_constrained, possible_moves
-    pairs_start_goal = [('StandInit', 'Hello', 8), ('Hello', 'StandZero', 8), ('StandZero', 'SitRelax', 8),
-                        ('Diagonalleft', 'Stand', 6), ('Stand', 'Sit', 8), ('Diagonalleft', 'WipeForehead', 4),
-                        ('WipeForehead', 'Crouch', 9)]
+    pairs_start_goal = [('StandInit', 'Hello', 8), ('Hello', 'StandZero', 6), ('StandZero', 'SitRelax', 8),
+                        ('Diagonalleft', 'Stand', 6), ('Stand', 'Sit', 6), ('Diagonalleft', 'WipeForehead', 4),
+                        ('WipeForehead', 'Crouch', 8)]
 
     # begin itteration
     path.append(pairs_start_goal[0][0])

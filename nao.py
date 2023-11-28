@@ -36,11 +36,12 @@ class Nao(Problem):
         if state[2]  < possible_move.duration:
             return False
         #if postconditions from previos move dont go with precond of current move
-        return self.precond_satisfied(state, possible_move)
+        return self.precond_satisfied(state[0], possible_move)
 
     def precond_satisfied(self,current_move, possible_move):
         #check if precond and post cond match, we chose an assumption
         #if it is not listed in the metafile it is considered True
+        print(current_move)
         for key, value in possible_move.preconditions.items():
             if value == False:
                 if key not in current_move.postconditions:
@@ -74,7 +75,7 @@ class Nao(Problem):
         current_move, possible_moves, time_constrained = state
         #goal test - time constrained is satisfied with a window of 4 seconds
         #the last position is compatible with the goal position
-        return time_constrained < 4 and self.precond_satisfied(current_move,self.goal)
+        return time_constrained < 2 and self.precond_satisfied(current_move,self.goal)
 
     def actions(self, state):
         return self.successor(state).keys()
