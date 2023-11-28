@@ -8,6 +8,9 @@ def main(config):
     start_time = time.time()
     moves = get_moves_metadata(config)
     path = get_path(config,moves)
+    print("PRINTING PLANNED MOVES:")
+    print(path)
+    return
     # iterate search algoritham to find best transitions between mandatory states
     for move_name in path:  # for each element of final_path
         print(move_name)

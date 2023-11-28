@@ -104,7 +104,7 @@ for i, rows in read_df.iterrows():
             supposed_duration = entry_mv1['Duration'] + entry_mv2['Duration']
             
             if supposed_duration + 2 < actual_duration:
-                entry_mv1['Precond'][ ( 'compatible_' + entry_mv2['MoveName'] ) ] = False
+                entry_mv1['Postcond'][ ( 'compatible_' + entry_mv2['MoveName'] ) ] = False
                 
         except Exception as e:
             print("Error creating broker:", e)
