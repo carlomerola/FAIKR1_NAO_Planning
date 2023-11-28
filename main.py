@@ -4,6 +4,7 @@ import re
 from utils import *
 
 
+
 def main(config):
     start_time = time.time()
     moves = get_moves_metadata(config)
@@ -23,8 +24,8 @@ def main(config):
         print(time.time()-start_time)
 
 if __name__ == "__main__":
-    config = get_config()    
-    music_thread = threading.Thread(target=play_music, args=(config['directory'] + "//"+config['music_location'],))
+    config = get_config()
+    music_thread = threading.Thread(target=play_music, args=(os.path.join(config['directory'],config['music_location']),))
     music_thread.start()
     main(config)
     print (music_thread.join())

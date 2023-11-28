@@ -4,23 +4,20 @@ import sys
 import time
 import playsound
 from aima.search import *
+import configparser
 
 def get_config():
-    config={}
-    robot_ip = "127.0.0.1"
-    port = 9559
+    parser = configparser.ConfigParser()
+    parser.read('config.ini')
+    config = parser['DEFAULT']
     if len(sys.argv) > 2:
-        port = int(sys.argv[2])
-        robot_ip = sys.argv[1]
+        config['port'] = sys.argv[2]
+        config['ip'] = sys.argv[1]
     elif len(sys.argv) == 2:
-        robot_ip = sys.argv[1]
-    config['ip'] = robot_ip
-    config['port'] = port
+        config['ip'] = sys.argv[1]
     config['directory'] = os.getcwd()
-    config.update({'dance_moves_folder_location': 'dance_moves',
-                   'metadata_file_location': 'meta_data//metadata.csv',
-                   'music_location': 'tequila.mp3'
-                   })
+    metadata_loc = config['metadata_file_location'].split('//')
+    config['metadata_file_location'] = os.path.join(metadata_loc[0], metadata_loc[1])
     return config
 
 
