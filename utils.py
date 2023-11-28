@@ -52,8 +52,8 @@ def get_path(config, moves):
 
     # define order and time frame for mandatory states
     # state representation = initial, goal, time_constrained, possible_moves
-    pairs_start_goal = [('StandInit', 'Hello', 8), ('Hello', 'StandZero', 8), ('StandZero', 'SitRelax', 9),
-                        ('Diagonalleft', 'Stand', 7), ('Stand', 'Sit', 7), ('Diagonalleft', 'WipeForehead', 4),
+    pairs_start_goal = [('StandInit', 'Hello', 8), ('Hello', 'StandZero', 8), ('StandZero', 'SitRelax', 8),
+                        ('Diagonalleft', 'Stand', 6), ('Stand', 'Sit', 8), ('Diagonalleft', 'WipeForehead', 4),
                         ('WipeForehead', 'Crouch', 9)]
 
     # begin itteration
@@ -61,9 +61,13 @@ def get_path(config, moves):
     for (starting_state_name, goal_state_name, time_constraint) in pairs_start_goal:
         # generate the solution via search algorithm
         start_time = time.time()
-        n = Nao(initial=(moves[starting_state_name], tuple(transition_moves), time_constraint),
-                goal=moves[goal_state_name])
-        answer = uniform_cost_search(n, lambda n: n.path_cost)
+        while True:
+            n = Nao(initial=(moves[starting_state_name], tuple(transition_moves), time_constraint),
+                    goal=moves[goal_state_name])
+            answer = uniform_cost_search(n, lambda n: n.path_cost)
+            if answer != None:
+                break
+            time_constraint+=1
         print('Path cost: ' + str(answer.get_path_cost()))
         path += answer.solution()
         if 'sit' in goal_state_name.lower():

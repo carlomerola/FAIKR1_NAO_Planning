@@ -12,7 +12,7 @@ def main(robotIP, port,text):
         print "Could not create proxy to ALTextToSpeech"
         print "Error was: ", e
 
-    time.sleep(2)
+    time.sleep(3)
 
 if __name__ == "__main__":
 
