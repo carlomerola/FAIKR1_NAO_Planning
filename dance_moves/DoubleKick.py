@@ -111,13 +111,21 @@ names.append("RWristYaw")
 times.append([6.4])
 keys.append([[0.0987845, [3, -2.14667, 0], [3, 0, 0]]])
 
+
+
 try:
-  # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-  # motion = ALProxy("ALMotion", IP, 9559)
-    config = get_config()
-   
-    otion = ALProxy("ALMotion", config['ip'], config['port'])
-    otion.angleInterpolationBezier(names, times, keys)
-  
+  robotIP = "127.0.0.1"
+  port = 9559
+
+  if len(sys.argv) <= 1:
+    print "(robotIP default: 127.0.0.1)"
+  elif len(sys.argv) <= 2:
+    robotIP = sys.argv[1]
+  else:
+    port = int(sys.argv[2])
+    robotIP = sys.argv[1]
+
+  motion = ALProxy("ALMotion",robotIP,port)
+  motion.angleInterpolationBezier(names, times, keys)
 except BaseException, err:
-    print err
+  print err

@@ -3,24 +3,24 @@ import threading
 import re
 from utils import *
 
-
-
 def main(config):
+    """
+    1. Run the algorithm and create dance choreograph as a path of states
+    2. Run the dance choreographe on the simulator
+    """
     start_time = time.time()
     moves = get_moves_metadata(config)
+    #get list of states (path) that represents the choreographe
     path = get_path(config,moves)
-    print("PRINTING PLANNED MOVES:")
-    print(path)
-    return
-    # iterate search algoritham to find best transitions between mandatory states
+    # run the states on the simulator
     for move_name in path:  # for each element of final_path
         print(move_name)
         print('running: ' + move_name)
         if 'Say' in move_name:
             text = re.sub(r"(\w)([A-Z])", r"\1 \2", move_name[3:])
-            os.system("python " + "dance_moves//" + 'SayText.py' + " " + config['ip'] + ' ' + str(config['port']) + ' "' + text + '"')
+            os.system("python " + os.path.join(config["dance_moves_folder_location"],'SayText.py') + " " + config['ip'] + ' ' + str(config['port']) + ' "' + text + '"')
         else:
-            os.system("python " + "dance_moves//" + moves[move_name].file_name + " " + config['ip'] + ' ' + str(config['port']))
+            os.system("python " + os.path.join(config["dance_moves_folder_location"],moves[move_name].file_name) + " " + config['ip'] + ' ' + str(config['port']))
         print(time.time()-start_time)
 
 if __name__ == "__main__":

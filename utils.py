@@ -7,6 +7,7 @@ from aima.search import *
 import configparser
 
 def get_config():
+    #read config file
     parser = configparser.ConfigParser()
     parser.read('config.ini')
     config = parser['DEFAULT']
@@ -45,6 +46,9 @@ def get_moves_metadata(config):
 
 
 def get_path(config, moves):
+    """
+    Iterations of uniform cost search to find best path (list of states) that satisfies the time constraint
+    """
     path = []
 
     transition_moves = [val for key, val in moves.items() if val.mandatory == 0 and key not in
@@ -60,7 +64,6 @@ def get_path(config, moves):
     path.append(pairs_start_goal[0][0])
     for (starting_state_name, goal_state_name, time_constraint) in pairs_start_goal:
         # generate the solution via search algorithm
-        start_time = time.time()
         while True:
             n = Nao(initial=(moves[starting_state_name], tuple(transition_moves), time_constraint),
                     goal=moves[goal_state_name])
@@ -82,6 +85,7 @@ def get_path(config, moves):
     return path
 
 def sit_and_say_tequila(move_name,path):
+    #special combinations of moves to ensure a WOW effect when the Tequila sections comes
     phrase, next_move = ('WaitForIt','Diagonalleft') if move_name != 'Sit' else ('OneMoreTime','Diagonalright')
     path.append('Say' + phrase)
     path.append(move_name)
@@ -91,6 +95,7 @@ def sit_and_say_tequila(move_name,path):
     return path
 
 def crouch_and_say_tequila(move,path):
+    # special combinations of moves to ensure a WOW effect when the Tequila sections comes
     path.append(move)
     path.append('SayTequila')
     return path
