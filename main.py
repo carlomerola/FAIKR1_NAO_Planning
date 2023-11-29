@@ -3,7 +3,14 @@ import threading
 import re
 from utils import *
 
-def main(config):
+def play_music(path,event):  # music playback by subprocess
+    #playsound.playsound(path) runs longer that ~130 seconds (the duration of the song)
+    playsound.playsound(path)
+    print('Done')
+    event.set()
+
+
+def main(config,event):
     """
     1. Run the algorithm and create dance choreograph as a path of states
     2. Run the dance choreographe on the simulator
@@ -22,10 +29,14 @@ def main(config):
         else:
             os.system("python " + os.path.join(config["dance_moves_folder_location"],moves[move_name].file_name) + " " + config['ip'] + ' ' + str(config['port']))
         print(time.time()-start_time)
+    event.set()
 
 if __name__ == "__main__":
     config = get_config()
-    music_thread = threading.Thread(target=play_music, args=(os.path.join(config['directory'],config['music_location']),))
+    finish_event = threading.Event()
+    music_thread = threading.Thread(target=play_music, args=(os.path.join(config['directory'],config['music_location']),finish_event))
     music_thread.start()
-    main(config)
-    print (music_thread.join())
+    main_thread = threading.Thread(target=main, args=(config, finish_event))
+    main_thread.start()
+    finish_event.wait()
+
