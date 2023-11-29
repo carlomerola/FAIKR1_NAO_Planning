@@ -21,11 +21,6 @@ def get_config():
     config['metadata_file_location'] = os.path.join(metadata_loc[0], metadata_loc[1])
     return config
 
-
-def play_music(path):  # music playback by subprocess
-    playsound.playsound(path)
-
-
 def eval_conditions(st):
     if pd.isna(st):
         return dict()
@@ -55,8 +50,8 @@ def get_path(config, moves):
 
     # define order and time frame for mandatory states
     # state representation = initial, goal, time_constrained, possible_moves
-    pairs_start_goal = [('StandInit', 'Hello', 8), ('Hello', 'StandZero', 6), ('StandZero', 'SitRelax', 8),
-                        ('Diagonalleft', 'Stand', 6), ('Stand', 'Sit', 6), ('Diagonalleft', 'WipeForehead', 4),
+    pairs_start_goal = [('StandInit', 'Hello', 8), ('Hello', 'StandZero', 6), ('StandZero', 'SitRelax', 6),
+                        ('Diagonalleft', 'Stand', 4), ('Stand', 'Sit', 6), ('Diagonalleft', 'WipeForehead', 4),
                         ('WipeForehead', 'Crouch', 8)]
 
     # begin itteration
