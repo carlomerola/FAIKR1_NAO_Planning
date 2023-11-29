@@ -41,7 +41,6 @@ class Nao(Problem):
     def precond_satisfied(self,current_move, possible_move):
         #check if precond and post cond match, we chose an assumption
         #if it is not listed in the metafile it is considered True
-        print(current_move)
         for key, value in possible_move.preconditions.items():
             if value == False:
                 if key not in current_move.postconditions:
