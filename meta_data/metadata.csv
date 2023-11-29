@@ -1,4 +1,4 @@
-;Duration;FileName;Mandatory;MoveName;Postcond;Precond
+;Duration;FileName;Mandatory;MoveName;Precond;Postcond
 0;4.365;AirGuitar.py;0;AirGuitar;;{'compatible_sit':False , 'compatible_stand':False , 'compatible_crouch':False}
 1;5.906;ArmDance.py;0;ArmDance;;
 2;13.129;Armsopening.py;0;Armsopening;;
