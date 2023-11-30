@@ -49,6 +49,7 @@ python main.py "127.0.0.1" 53860
 * __main.py__ - run main program
 * __nao.py__ - define classes and search problem
 * __utils.py__ - helper functions
+* __find_conflicts.py__ - attempt to find move preconditions/postconditions automatically
 * __meta_data__ 
 * __dance_moves__
 * __aima__ - Code for Artificial Intelligence: A Modern Approach (AIMA) 4th edition by Peter Norvig and Stuart Russel.
