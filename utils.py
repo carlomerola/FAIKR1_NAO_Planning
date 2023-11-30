@@ -50,9 +50,9 @@ def get_path(config, moves):
 
     # define order and time frame for mandatory states
     # state representation = initial, goal, time_constrained, possible_moves
-    pairs_start_goal = [('StandInit', 'Hello', 8), ('Hello', 'StandZero', 6), ('StandZero', 'SitRelax', 6),
-                        ('Diagonalleft', 'Stand', 4), ('Stand', 'Sit', 6), ('Diagonalleft', 'WipeForehead', 4),
-                        ('WipeForehead', 'Crouch', 8)]
+    pairs_start_goal = [('StandInit', 'Hello', 7), ('Hello', 'StandZero', 9), ('StandZero', 'SitRelax', 5),
+                        ('Diagonalleft', 'Stand', 5), ('Stand', 'Sit', 6), ('Diagonalleft', 'WipeForehead', 4),
+                        ('WipeForehead', 'Crouch', 9)]
 
     # begin itteration
     path.append(pairs_start_goal[0][0])
@@ -61,7 +61,7 @@ def get_path(config, moves):
         while True:
             n = Nao(initial=(moves[starting_state_name], tuple(transition_moves), time_constraint),
                     goal=moves[goal_state_name])
-            answer = uniform_cost_search(n, lambda n: n.path_cost)
+            answer = breadth_first_tree_search(n)
             if answer != None:
                 break
             time_constraint+=1
