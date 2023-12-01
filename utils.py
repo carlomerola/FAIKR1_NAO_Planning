@@ -50,7 +50,7 @@ def get_path(config, moves):
 
     # define order and time frame for mandatory states
     # state representation = initial, goal, time_constrained, possible_moves
-    pairs_start_goal = [('StandInit', 'Hello', 7), ('Hello', 'StandZero', 9), ('StandZero', 'SitRelax', 5),
+    pairs_start_goal = [('StandInit', 'Hello', 9), ('Hello', 'StandZero', 10), ('StandZero', 'SitRelax', 5),
                         ('Diagonalleft', 'Stand', 5), ('Stand', 'Sit', 6), ('Diagonalleft', 'WipeForehead', 4),
                         ('WipeForehead', 'Crouch', 9)]
 
